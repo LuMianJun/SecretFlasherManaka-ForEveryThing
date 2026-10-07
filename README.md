@@ -1,13 +1,11 @@
 # SecretFlasherManaka For EveryThing
 
-面向 **SecretFlasherManaka** 的 BepInEx IL2CPP 插件，将游戏内的振动和活塞状态提供给其他插件，让不同硬件桥接可以共用同一套游戏接口。
+面向 **SecretFlasherManaka** 的 BepInEx IL2CPP 插件，为其他插件和硬件桥接提供统一的游戏状态接口。
 
 ## 当前能力
 
-- 读取游戏振动状态：关闭、低档、高档。
-- 读取游戏活塞模式：关闭、慢速、中速、快速。
 - 提供状态变化事件和持续观察事件，方便桥接插件跟随游戏状态。
-- 在暂停、场景切换、状态来源失效或退出时通知桥接插件停止输出。
+- 在暂停、场景切换、状态不可用或退出时通知桥接插件停止输出。
 
 ## 安装与使用
 
@@ -28,7 +26,7 @@
 | 振动 | Off / Low / High | `GameStateHub` |
 | 活塞 | Off / Slow / Medium / Fast | `PistonStateHub` |
 
-状态不可用时提供 `Unknown`。活塞模式来自游戏 UI 的状态缓存，表示游戏模式。
+状态不可用时提供 `Unknown`。
 
 ## 本地构建
 
@@ -50,7 +48,7 @@ bin/Release/net6.0/SecretFlasherManaka.ForEveryThing.dll
 
 ## 开发与接入
 
-其他硬件桥接可以引用本插件，订阅振动和活塞事件，再转换为对应设备的控制指令。
+其他硬件桥接可以引用本插件，订阅游戏状态事件，再转换为对应设备的控制指令。
 
 API、事件使用方式及实现说明见 [开发文档](docs/DEVELOPMENT.md)。源码位于 `src/`，插件入口为 `Plugin.cs`。
 
