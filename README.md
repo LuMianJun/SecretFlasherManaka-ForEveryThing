@@ -11,11 +11,11 @@
 
 需要 Windows x64 和游戏已有的 **BepInEx 6 IL2CPP** 环境。当前适配环境为 BepInEx 6.0.0-be.735、Unity 2022.3.62f2。
 
-1. 从 [BooBoopBridge Release](https://github.com/LuMianJun/SecretFlasherManaka-BooBoopBridge/releases/latest) 下载安装包，或自行构建。
-2. 退出游戏，将 `SecretFlasherManaka.ForEveryThing.dll` 放入游戏目录下的 `BepInEx/plugins/SecretFlasherManakaBooBoop/`。
-3. 安装你需要的硬件桥接插件，然后启动游戏。
+1. 按下方构建方法生成 `SecretFlasherManaka.ForEveryThing.dll`。也可以从 [BooBoopBridge Release](https://github.com/LuMianJun/SecretFlasherManaka-BooBoopBridge/releases/latest) 的安装包中提取此 DLL。
+2. 退出游戏，将 `SecretFlasherManaka.ForEveryThing.dll` 放入游戏目录下的 `BepInEx/plugins/SecretFlasherManakaForEveryThing/`。
+3. 启动游戏。需要使用状态数据的插件可自行接入本插件接口。
 
-使用 BooBoop 设备时，直接按 [BooBoopBridge 的安装说明](https://github.com/LuMianJun/SecretFlasherManaka-BooBoopBridge#readme) 安装完整包即可，其中已包含本插件。单独安装本插件时，只提供游戏状态；设备连接和动作控制由桥接插件负责。
+本插件可独立安装，并供状态显示、日志记录、自动化或硬件桥接等插件使用。使用 BooBoop 设备时，可按 [BooBoopBridge 的安装说明](https://github.com/LuMianJun/SecretFlasherManaka-BooBoopBridge#readme) 安装完整包，其中已包含本插件。
 
 更新前移出旧版本 DLL，避免重复加载。运行日志位于 `BepInEx/LogOutput.log`。
 
@@ -48,14 +48,13 @@ bin/Release/net6.0/SecretFlasherManaka.ForEveryThing.dll
 
 ## 开发与接入
 
-其他硬件桥接可以引用本插件，订阅游戏状态事件，再转换为对应设备的控制指令。
+其他插件可以引用本插件并订阅游戏状态事件，按自身需求处理数据。硬件桥接可以将状态转换为设备控制指令，也可以接入其他硬件控制库。
 
 API、事件使用方式及实现说明见 [开发文档](docs/DEVELOPMENT.md)。源码位于 `src/`，插件入口为 `Plugin.cs`。
 
-## 相关项目
+## 接入示例
 
-- [SecretFlasherManaka-BooBoopBridge](https://github.com/LuMianJun/SecretFlasherManaka-BooBoopBridge)：游戏与 BooBoop 设备的整合桥接及完整安装包。
-- [BooBoopControl](https://github.com/LuMianJun/BooBoopControl)：BooBoop 设备控制库，当前支持 FN010-RX。
+- [SecretFlasherManaka-BooBoopBridge](https://github.com/LuMianJun/SecretFlasherManaka-BooBoopBridge)：使用本插件接入 BooBoop 设备，提供完整安装包。
 
 ## 许可证
 
