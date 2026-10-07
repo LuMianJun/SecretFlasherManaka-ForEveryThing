@@ -87,15 +87,13 @@ dotnet build .\SecretFlasherManaka.ForEveryThing.csproj -c Release "-p:GameDir=$
 2. **唯一性校验只在查找阶段执行。** PistonBinding.Observe 在缓存仍有效时不再枚举面板；若同一场景之后增加第二个启用面板，仍会沿用旧面板，直到缓存失效并触发查找。需要进一步验证 additive UI 等实际场景；若要求持续唯一性，应增加生命周期感知或有界复核。
 3. 精确反射类型、成员及 IL2CPP wrapper 是版本耦合点。编译只能验证当前引用能使用这些 API，不能证明运行时 Hook、字段读取或 UI 生命周期正确。
 
-2026-10-07 本机三项目 Release 构建成功（0 警告、0 错误），已有 **42/42 mock 通过**，覆盖两套纯 CLR Hub 和消费者状态机。mock 没有加载 Plugin、GameBinding 或 PistonBinding，尚未验证实际游戏。此次仅审查并更新文档，没有修改观察源码。
+2026-10-07 三项目 Release 构建成功，0 错误；游戏源码有 6 项既有可空引用警告。**47/47 mock 通过**，覆盖两套纯 CLR Hub、消费者状态机及安装路径解析。
 
 ## 仓库入口与复用
 
 在本仓库运行 build.ps1 -GameDir 你的游戏目录，或 bash build.sh 你的游戏目录。仓库名称使用横线，程序集使用点号；本次目录更名没有修改游戏 API 或插件 GUID。
 
 ForEveryThing 是艺术名称，当前提供 SecretFlasherManaka 的振动和活塞观察接口。不同硬件 Bridge 都可以引用该 DLL，使用相同的 Observed 心跳与停止契约；游戏项目不接纳具体硬件的协议编号。程序集引用之外，还需在消费者插件上声明游戏 GUID 依赖。
-
-仓库重组后的全量编译成功，但显示 6 项已有的 Unity 对象可空引用警告；前文“0 警告”对应之前的增量构建记录，不能当作本次全量结果。
 
 ## 许可证
 
